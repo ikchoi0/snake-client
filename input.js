@@ -1,5 +1,5 @@
 var stdin = process.stdin;
-let connecttion;
+let connection;
 
 const { MOVE_KEYS } = require('./constants');
 // setup interface to handle user input from stdin
@@ -17,7 +17,9 @@ const handleUserInput = function (data) {
   if (data === "\u0003") {
     process.exit();
   }
-  connection.write(MOVE_KEYS[data]);
+  if (Object.keys(MOVE_KEYS).includes(data)){
+    connection.write(MOVE_KEYS[data]);
+  }
 };
 stdin.on("data", handleUserInput);
 
