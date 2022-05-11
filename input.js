@@ -1,5 +1,7 @@
 var stdin = process.stdin;
 let connecttion;
+
+const { MOVE_KEYS } = require('./constants');
 // setup interface to handle user input from stdin
 const setupInput = function (conn) {
   connection = conn;
@@ -11,23 +13,11 @@ const setupInput = function (conn) {
 };
 const handleUserInput = function (data) {
   // your code here
+  let messageToSend = "Hellolol";
   if (data === "\u0003") {
     process.exit();
   }
-  let command = "";
-  if (data === "w") {
-    command = "up";
-  }
-  if (data === "a") {
-    command = "left";
-  }
-  if (data === "s") {
-    command = "down";
-  }
-  if (data === "d") {
-    command = "right";
-  }
-  connection.write(`Move: ${command}`);
+  connection.write(MOVE_KEYS[data]);
 };
 stdin.on("data", handleUserInput);
 
