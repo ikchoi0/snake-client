@@ -10,4 +10,4 @@ const conn = connect();
 //   conn.write("Move: up");
 // }, 500);
 
-setupInput();
+setupInput(conn);

@@ -1,7 +1,8 @@
 var stdin = process.stdin;
-
+let connecttion;
 // setup interface to handle user input from stdin
-const setupInput = function () {
+const setupInput = function (conn) {
+  connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding("utf8");
@@ -13,10 +14,23 @@ const handleUserInput = function (data) {
   if (data === "\u0003") {
     process.exit();
   }
-
+  let command = "";
+  if (data === "w") {
+    command = "up";
+  }
+  if (data === "a") {
+    command = "left";
+  }
+  if (data === "s") {
+    command = "down";
+  }
+  if (data === "d") {
+    command = "right";
+  }
+  connection.write(`Move: ${command}`);
 };
 stdin.on("data", handleUserInput);
 
 module.exports = {
   setupInput,
-}
+};
